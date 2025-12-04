@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Nursing Prometric Simulation</title>
+<style>
+  * {margin:0; padding:0; box-sizing:border-box; font-family: Arial, sans-serif;}
+  html, body {height:100%; width:100%; overflow-x:hidden; transition: opacity 1s ease;}
+  body {
+    background: url('https://raw.githubusercontent.com/gyoutrain-lab/production-prometrictest5/main/assets/iconmos.jpg') no-repeat center center fixed;
+    background-size: cover;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    position:relative;
+    color:#fff;
+  }
+
+  /* Subtle flowing water effect */
+  body::before {
+    content:'';
+    position:absolute;
+    top:0; left:0;
+    width:100%; height:100%;
+    background: url('https://raw.githubusercontent.com/gyoutrain-lab/production-prometrictest5/main/assets/iconmos.jpg') center center/cover no-repeat;
+    opacity:0.1;
+    animation: flow 10s infinite linear;
+    z-index:0;
+  }
+  @keyframes flow {0% {transform: translateY(0);} 50% {transform: translateY(20px);} 100% {transform: translateY(0);}}
+
+  /* Container and ripple effect */
+  .container {
+    position:relative;
+    z-index:1;
+    text-align:center;
+    max-width:800px;
+    padding:20px;
+    background: rgba(0,0,0,0.4);
+    border-radius:15px;
+    overflow:hidden;
+    transition: opacity 1s ease, transform 1s ease;
+  }
+
+  /* Ripple animation using pseudo-element */
+  .container::before {
+    content:'';
+    position:absolute;
+    top:-50%; left:-50%;
+    width:200%; height:200%;
+    background: radial-gradient(circle, rgba(255,255,255,0.05) 0%, transparent 70%);
+    animation: ripple 6s infinite linear;
+    z-index:0;
+  }
+  @keyframes ripple {
+    0% {transform: scale(1) translate(0,0);}
+    50% {transform: scale(1.05) translate(10px,10px);}
+    100% {transform: scale(1) translate(0,0);}
+  }
+
+  .container * {position: relative; z-index:1;}
+
+  .top-img img {max-width:200px; display:block; margin:0 auto 20px auto; transition: transform 1s ease, opacity 1s ease;}
+  h1 {font-size:2rem; margin-bottom:10px; transition: transform 1s ease, opacity 1s ease;}
+  h3 {font-size:1rem; font-weight:normal; margin-bottom:30px; transition: transform 1s ease, opacity 1s ease;}
+
+  .social {display:flex; justify-content:center; gap:15px; margin-bottom:30px;}
+  .social img {width:40px; height:40px; transition: transform 0.2s;}
+  .social img:hover {transform: scale(1.2);}
+
+  .registration {display:flex; flex-direction:column; gap:10px; margin-bottom:20px; align-items:center;}
+  .registration input {padding:10px; width:70%; border-radius:5px; border:none;}
+  .registration button {padding:10px 20px; border:none; border-radius:5px; background:#00aaff; color:#fff; cursor:pointer; transition: background 0.3s;}
+  .registration button:hover {background:#0088cc;}
+
+  .qr {position:absolute; bottom:20px; right:20px; max-width:120px; z-index:1; transition: transform 1s ease, opacity 1s ease;}
+
+  .fade-out {opacity:0; transform: translateY(-50px);}
+  .fade-image {transform: scale(1.2); opacity:0;}
+</style>
+</head>
+<body>
+  <div class="container" id="mainContainer">
+    <div class="top-img">
+      <img id="topImage" src="https://raw.githubusercontent.com/gyoutrain-lab/production-prometrictest5/main/assets/iconmos.jpg" alt="iconmos">
+    </div>
+    <h1 id="titleText">Nursing Prometric Actual Simulation Test</h1>
+    <h3 id="subtitleText">Based on the Prometric/SMLE Saudi Council and ENCLEX test materials (tricky and hard level)<br>Prepared by Giyono Asfarrasyid, ETK Yogyakarta</h3>
+
+    <div class="social">
+      <a href="tel:+6285399652487"><img src="https://cdn-icons-png.flaticon.com/512/597/597177.png" alt="Phone"></a>
+      <a href="https://wa.me/6285399652487"><img src="https://cdn-icons-png.flaticon.com/512/733/733585.png" alt="WhatsApp"></a>
+      <a href="mailto:gyoutrain@gmail.com"><img src="https://cdn-icons-png.flaticon.com/512/732/732200.png" alt="Email"></a>
+      <a href="https://web.facebook.com/gyouskill/"><img src="https://cdn-icons-png.flaticon.com/512/733/733547.png" alt="Facebook"></a>
+      <a href="https://www.instagram.com/etkyogya"><img src="https://cdn-icons-png.flaticon.com/512/733/733558.png" alt="Instagram"></a>
+    </div>
+
+    <div class="registration">
+      <input type="text" id="username" placeholder="User Name">
+      <input type="text" id="wanumber" placeholder="WA Number">
+      <input type="text" id="batch" placeholder="Batch">
+      <button id="registerBtn">Register</button>
+    </div>
+
+    <div id="unlockMessage" style="margin-top:10px; color:#fff;"></div>
+    <button id="startQuizBtn" style="display:none; padding:10px 20px;">Load & Start Quiz</button>
+  </div>
+
+  <img id="qrImage" class="qr" src="https://raw.githubusercontent.com/gyoutrain-lab/production-prometrictest5/main/assets/danaqr.png" alt="danaqr">
+
+  <script>
+    const registerBtn = document.getElementById('registerBtn');
+    const startQuizBtn = document.getElementById('startQuizBtn');
+    const unlockMessage = document.getElementById('unlockMessage');
+    const container = document.getElementById('mainContainer');
+    const body = document.body;
+    const topImage = document.getElementById('topImage');
+    const qrImage = document.getElementById('qrImage');
+    const titleText = document.getElementById('titleText');
+    const subtitleText = document.getElementById('subtitleText');
+
+    registerBtn.addEventListener('click', () => {
+      const name = document.getElementById('username').value.trim();
+      const phone = document.getElementById('wanumber').value.trim();
+      const batch = document.getElementById('batch').value.trim();
+
+      if(!name || !phone || !batch){
+        alert('Please fill all fields!');
+        return;
+      }
+
+      fetch('YOUR_DEPLOYED_WEB_APP_URL', { // Replace with your GAS Web App URL
+        method:'POST',
+        body: JSON.stringify({name, phone, batch})
+      })
+      .then(res => res.json())
+      .then(data => {
+        if(data.ok){
+          unlockMessage.innerHTML = `Success! Your unlock code: <b>${data.unlockCode}</b>`;
+          startQuizBtn.style.display = 'inline-block';
+        } else {
+          unlockMessage.textContent = data.message;
+        }
+      })
+      .catch(err => {
+        console.error(err);
+        unlockMessage.textContent = 'Error communicating with server!';
+      });
+    });
+
+    startQuizBtn.addEventListener('click', () => {
+      const username = document.getElementById('username').value.trim();
+      const phone = document.getElementById('wanumber').value.trim();
+      const unlock = document.querySelector('#unlockMessage b').textContent;
+
+      // Animate fade out with top image, QR, title, subtitle
+      container.classList.add('fade-out');
+      body.classList.add('fade-out');
+      topImage.classList.add('fade-image');
+      qrImage.classList.add('fade-image');
+      titleText.classList.add('fade-image');
+      subtitleText.classList.add('fade-image');
+
+      setTimeout(() => {
+        window.location.href = `https://script.google.com/macros/s/AKfycbyH0CRYjz2TXGEX8W2n56rnW63_X80lmd88dKeRmNrJugJM-mcx6fwVXmub2MTt8jAmeA/exec?username=${encodeURIComponent(username)}&wa=${encodeURIComponent(phone)}&unlock=${encodeURIComponent(unlock)}`;
+      }, 1000);
+    });
+  </script>
+</body>
+</html>
