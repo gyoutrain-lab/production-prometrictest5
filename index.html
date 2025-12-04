@@ -19,7 +19,16 @@ body.fade-out{opacity:0;}
 #landing.hidden{display:none;}
 #landing h1{font-size:1.5rem; color:#0077cc; margin:10px 0; z-index:1; position:relative;}
 #landing h3{font-size:0.9rem; color:#555; margin-bottom:20px; z-index:1; position:relative;}
-#landing img.upper-img{max-width:150px; margin-bottom:10px; z-index:1; position:relative;}
+#landing img.upper-img{
+  max-width:450px;  /* 3x bigger */
+  margin-bottom:20px;
+  z-index:1;
+  position:relative;
+}
+@media(max-width:768px){
+  #landing img.upper-img{max-width:90%; height:auto;}
+}
+
 .social{display:flex; gap:15px; justify-content:center; flex-wrap:wrap; margin-bottom:20px; position:relative; z-index:1;}
 .social img{width:35px; height:35px; transition: transform 0.2s;}
 .social img:hover{transform: scale(1.2);}
@@ -163,13 +172,15 @@ const startQuizBtn = document.getElementById('startQuizBtn');
 const landing = document.getElementById('landing');
 const quizPage = document.getElementById('quizPage');
 
+const GOOGLE_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbyH0CRYjz2TXGEX8W2n56rnW63_X80lmd88dKeRmNrJugJM-mcx6fwVXmub2MTt8jAmeA/exec";
+
 registerBtn.addEventListener('click', async()=>{
   const name = document.getElementById('username').value.trim();
   const phone = document.getElementById('wanumber').value.trim();
   if(!name||!phone){showPopup("Fill all fields!"); return;}
 
   try{
-    const res = await fetch("https://script.google.com/macros/s/AKfycbyH0CRYjz2TXGEX8W2n56rnW63_X80lmd88dKeRmNrJugJM-mcx6fwVXmub2MTt8jAmeA/exec",{
+    const res = await fetch(GOOGLE_SCRIPT_URL,{
       method:"POST",
       body: JSON.stringify({name, phone})
     });
@@ -195,12 +206,10 @@ startQuizBtn.addEventListener('click',()=>{
 });
 
 /* ===== Quiz Loader ===== */
-const QUIZ_API = "YOUR_GOOGLE_SCRIPT_WEB_APP_URL"; 
 let questions=[], currentIndex=0;
-
 async function loadQuestions(unlockCode, username, wa){
   try{
-    const response = await fetch(`${QUIZ_API}?unlock=${encodeURIComponent(unlockCode)}&username=${encodeURIComponent(username)}&wa=${encodeURIComponent(wa)}`);
+    const response = await fetch(`${GOOGLE_SCRIPT_URL}?unlock=${encodeURIComponent(unlockCode)}&username=${encodeURIComponent(username)}&wa=${encodeURIComponent(wa)}`);
     questions = await response.json();
     renderQuestion();
   } catch(e){console.error(e); document.getElementById("quizContent").innerHTML="<p style='color:red;'>Failed to load quiz.</p>";}
