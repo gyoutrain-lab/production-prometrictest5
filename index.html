@@ -1,95 +1,127 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Nursing Prometric Actual Simulation Test</title>
-  <style>
-    body {
-      margin: 0;
-      font-family: Arial, sans-serif;
-      background: #f2f2f2;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: flex-start;
-      min-height: 100vh;
-    }
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Nursing Prometric Actual Simulation Test</title>
+<style>
+  body, html {
+    margin: 0;
+    padding: 0;
+    font-family: Arial, sans-serif;
+    height: 100%;
+    background: #f0f8ff;
+  }
 
-    /* Upper image */
-    .hero-image {
-      width: 100%;
-      max-height: 50vh;
-      overflow: hidden;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      background: #fff;
-    }
+  /* Flowing water background animation */
+  .water-bg {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: url('https://raw.githubusercontent.com/gyoutrain-lab/production-prometrictest5/main/assets/water.jpg') repeat;
+    background-size: cover;
+    animation: flow 10s linear infinite;
+    opacity: 0.2;
+    z-index: -1;
+  }
 
-    .hero-image img {
-      width: auto;
-      height: 50vh;
-      object-fit: cover;
-    }
+  @keyframes flow {
+    0% { background-position: 0 0; }
+    100% { background-position: 1000px 1000px; }
+  }
 
-    /* Title & subtitle */
-    .title-container {
-      text-align: center;
-      padding: 20px;
-    }
+  .container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    padding-top: 40px;
+  }
 
-    .title-container h1 {
-      font-size: 2rem;
-      margin: 10px 0;
-      color: #333;
-    }
+  /* Main icon */
+  .hero-icon img {
+    width: 150px;
+    height: auto;
+    margin-bottom: 20px;
+  }
 
-    .title-container p {
-      font-size: 1rem;
-      color: #555;
-      max-width: 600px;
-      margin: 0 auto;
-    }
+  /* Title & subtitle */
+  .title-container {
+    text-align: center;
+    margin-bottom: 30px;
+    color: #333;
+    max-width: 800px;
+  }
+  .title-container h1 {
+    font-size: 2rem;
+    margin: 10px 0;
+    font-weight: bold;
+    text-shadow: 1px 1px 2px #fff;
+  }
+  .title-container p {
+    font-size: 1rem;
+    text-shadow: 1px 1px 2px #fff;
+  }
 
-    /* Social icons */
-    .social {
-      display: flex;
-      justify-content: center;
-      gap: 15px;
-      margin: 20px 0;
-    }
+  /* Social icons */
+  .social {
+    display: flex;
+    gap: 15px;
+    margin-bottom: 30px;
+  }
+  .social a img {
+    width: 40px;
+    height: 40px;
+    transition: transform 0.2s;
+  }
+  .social a img:hover {
+    transform: scale(1.2);
+  }
 
-    .social a img {
-      width: 40px;
-      height: 40px;
-      transition: transform 0.2s;
-    }
+  /* Registration form */
+  .reg-form {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    width: 300px;
+    margin-bottom: 40px;
+  }
+  .reg-form input, .reg-form select, .reg-form button {
+    padding: 10px;
+    font-size: 1rem;
+    border-radius: 6px;
+    border: 1px solid #ccc;
+  }
+  .reg-form button {
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    cursor: pointer;
+  }
+  .reg-form button:hover {
+    background-color: #0056b3;
+  }
 
-    .social a img:hover {
-      transform: scale(1.2);
-    }
-
-    /* Responsive adjustments */
-    @media (max-width: 600px) {
-      .title-container h1 {
-        font-size: 1.5rem;
-      }
-      .title-container p {
-        font-size: 0.9rem;
-      }
-      .social a img {
-        width: 35px;
-        height: 35px;
-      }
-    }
-  </style>
+  /* Message */
+  .message {
+    text-align: center;
+    font-size: 1rem;
+    color: green;
+    margin-bottom: 20px;
+  }
+</style>
 </head>
 <body>
 
-  <!-- Upper half image -->
-  <div class="hero-image">
-    <img src="https://raw.githubusercontent.com/gyoutrain-lab/production-prometrictest5/main/assets/iconmos.jpg" alt="iconmos">
+<div class="water-bg"></div>
+
+<div class="container">
+
+  <!-- Main icon -->
+  <div class="hero-icon">
+    <img src="https://raw.githubusercontent.com/gyoutrain-lab/production-prometrictest5/main/assets/icon.jpg" alt="icon">
   </div>
 
   <!-- Title & subtitle -->
@@ -98,7 +130,7 @@
     <p>Based on the Prometric/SMLE Saudi Council and ENCLEX test materials, prepared by Giyono Asfarrasyid, ETK Yogyakarta</p>
   </div>
 
-  <!-- Social / contact icons -->
+  <!-- Social icons -->
   <div class="social">
     <a href="tel:+6285399652487"><img src="https://cdn-icons-png.flaticon.com/512/597/597177.png" alt="Phone"></a>
     <a href="https://wa.me/6285399652487"><img src="https://cdn-icons-png.flaticon.com/512/733/733585.png" alt="WhatsApp"></a>
@@ -106,6 +138,66 @@
     <a href="https://web.facebook.com/gyouskill/"><img src="https://cdn-icons-png.flaticon.com/512/733/733547.png" alt="Facebook"></a>
     <a href="https://www.instagram.com/etkyogya"><img src="https://cdn-icons-png.flaticon.com/512/733/733558.png" alt="Instagram"></a>
   </div>
+
+  <!-- Registration form -->
+  <div class="reg-form">
+    <input type="text" id="name" placeholder="Enter your name">
+    <input type="text" id="phone" placeholder="Enter WhatsApp #">
+    <input type="text" id="unlock" placeholder="Enter Unlock Code (if any)">
+    <select id="batch">
+      <option value="" disabled selected>Select Batch</option>
+      <option value="Batch A">Batch A</option>
+      <option value="Batch B">Batch B</option>
+      <option value="Batch C">Batch C</option>
+    </select>
+    <button id="registerBtn">Register</button>
+  </div>
+
+  <div class="message" id="message"></div>
+
+</div>
+
+<script>
+  const API_URL = "https://script.google.com/macros/s/AKfycbyf5bzVheALbRrn16YNe1tHlJOcfcf_oT0W-lZEk69C8t5z3jlei5ASiThtoM2UzpA1SQ/exec";
+
+  document.getElementById("registerBtn").addEventListener("click", () => {
+    const name = document.getElementById("name").value.trim();
+    const phone = document.getElementById("phone").value.trim();
+    const unlockCode = document.getElementById("unlock").value.trim();
+    const batch = document.getElementById("batch").value;
+
+    if (!name || !phone) {
+      document.getElementById("message").textContent = "Name & WhatsApp number are required!";
+      return;
+    }
+
+    // Capture inputs & send to Apps Script
+    fetch(API_URL, {
+      method: "POST",
+      body: JSON.stringify({ name, phone, unlockCode, batch })
+    })
+    .then(res => res.json())
+    .then(res => {
+      if(res.ok){
+        document.getElementById("message").textContent = `Registered successfully! Unlock Code: ${res.unlockCode || 'Pending'}`;
+        // Open WhatsApp message to admin
+        const waMsg = `Payment Confirmed, User Name: ${name}, WA#: ${phone}, Share Proof QR IDR 50k to get Unlock Code`;
+        window.open(`https://wa.me/6285399652487?text=${encodeURIComponent(waMsg)}`, "_blank");
+
+        // Optionally, redirect to quiz
+        setTimeout(() => {
+          window.location.href = API_URL + "?action=questions&mode=DEMO"; // DEMO gateway
+        }, 2000);
+      } else {
+        document.getElementById("message").textContent = res.message;
+      }
+    })
+    .catch(err => {
+      document.getElementById("message").textContent = "Error connecting to server!";
+      console.error(err);
+    });
+  });
+</script>
 
 </body>
 </html>
